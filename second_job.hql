@@ -24,13 +24,13 @@ create table if not exists volumebysector as
 create table if not exists firstdaysectorquotation as
 	select t1.sector,sum(t1.close) as firstdayquotation,year(t1.data) as anno 
 	from fullstocktable t1 join firstday2004_2018 t2
-	on t1.sector=t2.sector and t1.data=t2.firstday
+	on t1.sector=t2.sector and t1.data=t2.firstday and t1.ticker=t2.ticker
 	group by t1.sector,year(t1.data);
 
 create table if not exists lastdaysectorquotation as
 	select t1.sector,sum(t1.close) as lastdayquotation,year(t1.data) as anno
 	from fullstocktable t1 join lastday2004_2018 t2
-	on t1.sector=t2.sector and t1.data=t2.lastday
+	on t1.sector=t2.sector and t1.data=t2.lastday and t1.ticker=t2.ticker
 	group by t1.sector,year(t1.data);
 
 create table if not exists dailyavgquotationbysector as 
